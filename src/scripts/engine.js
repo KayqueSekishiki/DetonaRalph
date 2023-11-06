@@ -7,14 +7,23 @@ const state = {
   },
 
   values: {
-    timeId: setInterval(randomSquare, 1000),
-    countDownTimerId: setInterval(countDown, 1000),
     gameVelocity: 1000,
     hitPosition: 0,
     result: 0,
     currentTime: 60,
   },
+
+  actions: {
+    timeId: setInterval(randomSquare, 1000),
+    countDownTimerId: setInterval(countDown, 1000),
+  },
 };
+
+function playAudio(audioName) {
+  let audio = new Audio(`./src/audios/${audioName}.m4a`);
+  audio.volume = 0.1;
+  audio.play();
+}
 
 function countDown() {
   state.values.currentTime--;
@@ -45,6 +54,7 @@ function addListenerHitBox() {
         state.values.result++;
         state.view.score.textContent = state.values.result;
         state.values.hitPosition = null;
+        playAudio("hit");
       }
     });
   });
