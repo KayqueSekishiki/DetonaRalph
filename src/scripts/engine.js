@@ -60,8 +60,4 @@ function addListenerHitBox() {
   });
 }
 
-function init() {
-  addListenerHitBox();
-}
-
-init();
+(() => addListenerHitBox())();
